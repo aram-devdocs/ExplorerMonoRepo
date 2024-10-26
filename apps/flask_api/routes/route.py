@@ -5,6 +5,7 @@ from libs.server.services import UserService
 from apps.flask_api.middleware import generate_jwt, require_admin
 from libs.server.data_access.model import ApiKey
 from libs.server.data_access.database import db
+from libs.shared.utils.json import JSON
 from . import api
 
 # Define API models
@@ -19,9 +20,11 @@ user_model = api.model(
 class UserResource(Resource):
     @api.expect(user_model)
     def post(self):
-        data = api.payload
-        user_dto = UserCreateDTO(**data)
-        user = UserService.create_user(user_dto)
+        data = JSON.parse(api.payload)
+        # user_dto = UserCreateDTO(**data)
+        # TypeError: libs.shared.data_transfer.dto.UserCreateDTO() argument after ** must be a mapping, not Response
+        user_dto = UserCreateDTO(email=data["email"], name=data["name"])
+        user = UserService.create_user(user_dto, "mock_user_id")
         return {"id": user.id, "name": user.name, "email": user.email}, 201
 
 
