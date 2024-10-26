@@ -1,17 +1,25 @@
 from flask_restx import Resource, fields
 from flask import request, jsonify
-from libs.shared.data_transfer import UserCreateDTO
-from libs.server.services import UserService
+from libs.shared.data_transfer import UserCreateDTO, ApiKeyCreateDTO
+from libs.server.services import UserService, ApiKeyService
 from apps.flask_api.middleware import generate_jwt, require_admin
 from libs.server.data_access.model import ApiKey
 from libs.server.data_access.database import db
 from libs.shared.utils.json import JSON
 from . import api
 
-# Define API models
+# Define API models // TODO: Consolidate with DTOs
 user_model = api.model(
     "User",
     {"name": fields.String(required=True), "email": fields.String(required=True)},
+)
+
+api_key_model = api.model(
+    "ApiKey",
+    {
+        "is_admin": fields.Boolean(required=False, default=False),
+        "user_id": fields.String(required=True),
+    },
 )
 
 
@@ -20,7 +28,7 @@ user_model = api.model(
 class UserResource(Resource):
     @api.expect(user_model)
     def post(self):
-        data = JSON.parse(api.payload)
+        data: UserCreateDTO = JSON.parse(api.payload)
         # user_dto = UserCreateDTO(**data)
         # TypeError: libs.shared.data_transfer.dto.UserCreateDTO() argument after ** must be a mapping, not Response
         user_dto = UserCreateDTO(email=data["email"], name=data["name"])
@@ -28,22 +36,19 @@ class UserResource(Resource):
         return {"id": user.id, "name": user.name, "email": user.email}, 201
 
 
-@api.route("/generate_key")
+@api.route("/generate_key", methods=["POST"])
 class GenerateKeyResource(Resource):
-    @require_admin
+    # @require_admin
+    @api.expect(api_key_model)
     def post(self):
-        data = request.json
-        is_admin = data.get("is_admin", False)
-        duration = (
-            None if is_admin else 30
-        )  # Admin keys never expire; User keys expire in 30 days
 
-        api_key = ApiKey.generate_key(is_admin=is_admin, duration=duration)
-        db.session.add(api_key)
-        db.session.commit()
-
-        token = generate_jwt(api_key.key, is_admin)
-        return jsonify({"api_key": api_key.key, "jwt": token})
+        data: ApiKeyCreateDTO = JSON.parse(api.payload)
+        print(data)
+        api_key = ApiKeyService.create_api_key(
+            data=data,
+            requester_user_id="mock_user_id",
+        )
+        return {"api_key": api_key}, 201
 
 
 @api.route("/health", methods=["GET"])

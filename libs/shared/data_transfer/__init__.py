@@ -1,1 +1,1 @@
-from .dto import UserCreateDTO
+from .dto import UserCreateDTO, ApiKeyCreateDTO
