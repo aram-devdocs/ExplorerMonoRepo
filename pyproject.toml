@@ -19,6 +19,7 @@ pytest = "^8.3.3"
 pytest-cov = "^5.0.0"
 pyjwt = "^2.9.0"
 httplib2 = "^0.22.0"
+cryptography = "^43.0.3"
 
 
 

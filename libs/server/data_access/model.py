@@ -34,6 +34,7 @@ class ApiKey(db.Model):
     key = db.Column(db.String, unique=True, nullable=False)
     is_admin = db.Column(Boolean, default=False, nullable=False)
     expiry_date = db.Column(DateTime, nullable=True)
+    user_id = db.Column(db.String, db.ForeignKey("users.id", name="fk_api_keys_user_id"), nullable=False)
 
 
 class User(db.Model, Trackable):
