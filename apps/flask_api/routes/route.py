@@ -48,7 +48,8 @@ class GenerateKeyResource(Resource):
             data=data,
             requester_user_id="mock_user_id",
         )
-        return {"api_key": api_key}, 201
+
+        return {"api_key": str(api_key.key)}, 201
 
 
 @api.route("/health", methods=["GET"])

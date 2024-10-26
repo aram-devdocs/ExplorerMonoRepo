@@ -38,7 +38,8 @@ class ApiKeyService:
             encrypted_key = fernet.encrypt(hashed_key)
 
             # Store the encrypted key and salt in the database
-            api_key = ApiKeyCreateDTO(
+            api_key = ApiKey(
+                id=str(uuid.uuid4()),
                 key=encrypted_key,
                 is_admin=data['is_admin'],
                 user_id=data['user_id'],
