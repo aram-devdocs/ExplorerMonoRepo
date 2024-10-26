@@ -12,7 +12,6 @@ __pycache__/
 
 # Poetry
 *.lock
-*.toml
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
@@ -98,4 +97,4 @@ __pycache__/
 *.swp
 
 # Install scripts
-*.sh
+# *.sh
