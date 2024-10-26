@@ -83,8 +83,8 @@ If you need to reset the database:
 
 The installation script sets up Jupyter and configures the Poetry environment as a kernel. To use the Poetry environment in Jupyter:
 
-1. Open Jupyter Notebook.
-2. Go to Kernel > Change Kernel and select “Python (Poetry)”.
+1. After running poetry shell, you will see `Spawning shell within {path}`.
+2. In VS Code or Jupyter Notebook, select the Poetry environment as the kernel by find by path
 
 ## API Key Management
 
