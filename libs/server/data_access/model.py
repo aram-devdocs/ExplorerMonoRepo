@@ -27,7 +27,7 @@ class Trackable:
         self.archived_by = user_id
 
 
-class ApiKey(db.Model):
+class ApiKey(db.Model, Trackable):
     __tablename__ = "api_keys"
 
     id = db.Column(db.String, primary_key=True)
