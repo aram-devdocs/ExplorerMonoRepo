@@ -1,0 +1,10 @@
+Flask
+Flask-RESTX
+Flask-Migrate
+SQLAlchemy
+pydantic
+pytest
+pytest-cov
+pyjwt
+jupyter
+ipykernel

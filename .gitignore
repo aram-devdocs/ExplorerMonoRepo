@@ -1,0 +1,101 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment files
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# Poetry
+*.lock
+*.toml
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+notebooks/.ipynb_checkpoints
+
+# Database and migrations
+migrations/
+*.sqlite
+*.db
+
+# SQLAlchemy
+sqlite:///
+*.db
+*.sqlite
+
+# Flask
+instance/
+*.log
+
+# JWT Secret Key (if stored separately)
+.secret_key
+
+# Development logs
+*.log
+
+# Python virtual environments
+.venv/
+.venv/bin/
+.venv/lib/
+.venv/lib64/
+.venv/include/
+
+# Pytest
+.cache
+.pytest_cache/
+*.cover
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+
+# Bytecode files
+*.py[cod]
+*$py.class
+*.so
+
+# MyPy type check report
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Testing artifacts
+.tox/
+noxfile
+.nox/
+
+# pipenv
+Pipfile.lock
+
+# Other build and cache files
+build/
+dist/
+*.egg-info/
+.eggs/
+__pycache__/
+
+# Ignore compiled files
+*.o
+*.so
+
+# Ignore any IDE settings files (e.g., VSCode)
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Install scripts
+*.sh
